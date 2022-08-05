@@ -41,7 +41,16 @@ impl IsoLatin1Char {
     ///
     /// TODO
     pub fn is_alphabetic(&self) -> bool {
-        todo!()
+        match self.0 {
+            0x41..=0x5A |  // between A to Z
+            0x61..=0x7A |  // between a to z       
+            0xC0..=0xD6 |  // between À to Ö
+            0xD8..=0xDF |  // between Ø to ß
+            0xE0..=0xF6 |  // between à to ö
+            0xF8..=0xFF => true, // between ø to ÿ
+            _ => false
+        }
+
     }
 
     /// Returns `true` if this character satisfies either [`is_alphabetic`] or [`is_numeric`].
@@ -140,10 +149,10 @@ impl IsoLatin1Char {
     /// ```
     pub fn is_numeric(&self) -> bool {
         match self.0 {
-            0x30..=0x39 |      // between 0 to 9
+            0x30..=0x39 |  // between 0 to 9
             0xBC..=0xBE |  // between ¼ to ¾
             0xB2..=0xB3 |  // between ² to ³
-            0xB9 => true,    // only ¹
+            0xB9 => true,  // only ¹
             _ => false
         }
     }
